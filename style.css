@@ -28,6 +28,35 @@ body {
   overflow-x: hidden;
 }
 
+/* ===== BACKGROUND EFFECTS ===== */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(108, 92, 231, 0.025) 59px, rgba(108, 92, 231, 0.025) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(108, 92, 231, 0.025) 59px, rgba(108, 92, 231, 0.025) 60px);
+}
+
+.bg-gradients {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(108, 92, 231, 0.09), transparent 50%),
+    radial-gradient(ellipse at 85% 70%, rgba(0, 206, 201, 0.07), transparent 50%),
+    radial-gradient(ellipse at 40% 85%, rgba(253, 121, 168, 0.05), transparent 50%);
+}
+
+.network-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -58,11 +87,47 @@ body {
 }
 
 .nav-brand {
-  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-icon {
+  color: var(--accent);
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(108, 92, 231, 0.5));
+  transition: filter 0.3s;
+}
+
+.nav-brand:hover .nav-icon {
+  filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.8));
+}
+
+.nav-title {
+  font-size: 1.1rem;
   font-weight: 800;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.nav-divider {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-team {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  transition: color 0.3s;
+}
+
+.nav-brand:hover .nav-team {
+  color: var(--accent2);
 }
 
 .nav-links {
@@ -124,11 +189,23 @@ body {
               var(--bg);
 }
 
-.global-particles {
-  position: fixed;
+.hero-sparkles {
+  position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+}
+
+.hero-sparkle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkleFlicker ease-in-out infinite;
+}
+
+@keyframes sparkleFlicker {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
 }
 
 .hero-content {
@@ -267,7 +344,7 @@ body {
 }
 
 .section-dark {
-  background: var(--bg2);
+  background: rgba(18, 18, 26, 0.85);
 }
 
 .section-header {
@@ -305,7 +382,9 @@ body {
 }
 
 .about-card.main-card {
-  background: var(--card);
+  background: rgba(26, 26, 37, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(108, 92, 231, 0.2);
   border-radius: var(--radius);
   padding: 40px;
@@ -313,6 +392,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .about-card.main-card p {
@@ -340,18 +420,21 @@ body {
 }
 
 .about-card {
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(26, 26, 37, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 32px 24px;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .about-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(108, 92, 231, 0.3);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  border-color: rgba(108, 92, 231, 0.35);
+  box-shadow: 0 8px 40px rgba(108, 92, 231, 0.15), 0 0 0 1px rgba(108, 92, 231, 0.1);
 }
 
 .about-emoji {
@@ -378,13 +461,16 @@ body {
 }
 
 .task-card {
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(26, 26, 37, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 36px 28px;
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .task-card::before {
@@ -404,7 +490,8 @@ body {
 
 .task-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  border-color: rgba(108, 92, 231, 0.35);
+  box-shadow: 0 8px 40px rgba(108, 92, 231, 0.15), 0 0 0 1px rgba(108, 92, 231, 0.1);
 }
 
 .task-num {
@@ -539,16 +626,20 @@ body {
 }
 
 .timeline-content {
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(26, 26, 37, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 28px;
   transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .timeline-content:hover {
-  border-color: rgba(108, 92, 231, 0.3);
+  border-color: rgba(108, 92, 231, 0.35);
   transform: translateX(8px);
+  box-shadow: 0 8px 40px rgba(108, 92, 231, 0.15), 0 0 0 1px rgba(108, 92, 231, 0.1);
 }
 
 .timeline-step {
@@ -611,17 +702,20 @@ body {
 
 .day-card {
   flex: 1;
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(26, 26, 37, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 24px;
   transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .day-card:hover {
-  border-color: rgba(253, 121, 168, 0.3);
+  border-color: rgba(253, 121, 168, 0.35);
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 40px rgba(253, 121, 168, 0.12), 0 0 0 1px rgba(253, 121, 168, 0.1);
 }
 
 .day-emoji {
@@ -648,13 +742,16 @@ body {
 }
 
 .why-card {
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(26, 26, 37, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 32px;
   transition: all 0.4s;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .why-card::after {
@@ -673,7 +770,8 @@ body {
 
 .why-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  border-color: rgba(108, 92, 231, 0.35);
+  box-shadow: 0 8px 40px rgba(108, 92, 231, 0.15), 0 0 0 1px rgba(108, 92, 231, 0.1);
 }
 
 .why-number {
@@ -703,11 +801,14 @@ body {
 .quiz-container {
   max-width: 700px;
   margin: 0 auto;
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(26, 26, 37, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 40px;
   min-height: 360px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .quiz-progress {
@@ -849,22 +950,6 @@ body {
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== PARTICLE ===== */
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: particleFloat linear infinite;
-}
-
-@keyframes particleDrift {
-  0% { transform: translate(0, 0) scale(1); opacity: 0; }
-  10% { opacity: 0.8; }
-  50% { opacity: 0.5; }
-  90% { opacity: 0.3; }
-  100% { transform: translate(var(--drift, 100px), -200px) scale(0.3); opacity: 0; }
 }
 
 /* ===== RESPONSIVE ===== */

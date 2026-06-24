@@ -15,34 +15,216 @@ navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('active'));
 });
 
-// ===== PARTICLES =====
-const particlesContainer = document.getElementById('particles');
-const colors = ['rgba(108,92,231,0.4)', 'rgba(0,206,201,0.3)', 'rgba(253,121,168,0.3)'];
+// ===== UNIFIED CANVAS BACKGROUND =====
+const netCanvas = document.getElementById('networkCanvas');
+const netCtx = netCanvas.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
 
-function createParticle() {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  const size = Math.random() * 4 + 2;
-  const x = Math.random() * 100;
-  const y = Math.random() * 100;
-  const dur = Math.random() * 10 + 8;
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  const drift = (Math.random() - 0.5) * 200;
-  p.style.cssText = `
-    width:${size}px;height:${size}px;
-    left:${x}%;top:${y}%;
-    background:${color};
-    animation-name: particleDrift;
-    animation-duration:${dur}s;
-    animation-delay:${Math.random()*3}s;
-    --drift:${drift}px;
-  `;
-  particlesContainer.appendChild(p);
-  setTimeout(() => p.remove(), (dur + 4) * 1000);
+let netNodes = [];
+let netPackets = [];
+let floaters = [];
+
+const NODE_COUNT = 55;
+const FLOATER_COUNT = 35;
+const CONNECT_DIST = 150;
+
+function resizeNetCanvas() {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  netCanvas.width = w * dpr;
+  netCanvas.height = h * dpr;
+  netCanvas.style.width = w + 'px';
+  netCanvas.style.height = h + 'px';
+  netCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-setInterval(createParticle, 400);
-for (let i = 0; i < 30; i++) createParticle();
+function initNodes() {
+  netNodes = [];
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  for (let i = 0; i < NODE_COUNT; i++) {
+    netNodes.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.1,
+      vy: (Math.random() - 0.5) * 0.1,
+      r: Math.random() * 1.5 + 0.6,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function initFloaters() {
+  floaters = [];
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const palette = [
+    [108, 92, 231],
+    [0, 206, 201],
+    [253, 121, 168]
+  ];
+  for (let i = 0; i < FLOATER_COUNT; i++) {
+    const c = palette[Math.floor(Math.random() * palette.length)];
+    floaters.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.06,
+      vy: (Math.random() - 0.5) * 0.06,
+      r: Math.random() * 2 + 0.8,
+      color: c,
+      alpha: Math.random() * 0.25 + 0.08,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function spawnPacket(x1, y1, x2, y2) {
+  netPackets.push({
+    sx: x1, sy: y1, ex: x2, ey: y2,
+    t: 0,
+    speed: 0.002 + Math.random() * 0.003,
+    color: Math.random() > 0.5 ? [108, 92, 231] : [0, 206, 201]
+  });
+}
+
+function animate() {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  netCtx.clearRect(0, 0, w, h);
+
+  netNodes.forEach(n => {
+    n.x += n.vx;
+    n.y += n.vy;
+    n.phase += 0.008;
+    if (n.x < 0) { n.x = 0; n.vx *= -1; }
+    if (n.x > w) { n.x = w; n.vx *= -1; }
+    if (n.y < 0) { n.y = 0; n.vy *= -1; }
+    if (n.y > h) { n.y = h; n.vy *= -1; }
+  });
+
+  floaters.forEach(f => {
+    f.x += f.vx;
+    f.y += f.vy;
+    f.phase += 0.006;
+    if (f.x < -30) f.x = w + 30;
+    if (f.x > w + 30) f.x = -30;
+    if (f.y < -30) f.y = h + 30;
+    if (f.y > h + 30) f.y = -30;
+  });
+
+  for (let i = 0; i < netNodes.length; i++) {
+    for (let j = i + 1; j < netNodes.length; j++) {
+      const dx = netNodes[i].x - netNodes[j].x;
+      const dy = netNodes[i].y - netNodes[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < CONNECT_DIST) {
+        const alpha = (1 - dist / CONNECT_DIST) * 0.08;
+        netCtx.beginPath();
+        netCtx.moveTo(netNodes[i].x, netNodes[i].y);
+        netCtx.lineTo(netNodes[j].x, netNodes[j].y);
+        netCtx.strokeStyle = `rgba(108,92,231,${alpha})`;
+        netCtx.lineWidth = 0.5;
+        netCtx.stroke();
+        if (Math.random() < 0.0003) {
+          spawnPacket(netNodes[i].x, netNodes[i].y, netNodes[j].x, netNodes[j].y);
+        }
+      }
+    }
+  }
+
+  netNodes.forEach(n => {
+    const pulse = Math.sin(n.phase) * 0.5 + 0.5;
+    const glow = netCtx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 5);
+    glow.addColorStop(0, `rgba(108,92,231,${0.18 * pulse})`);
+    glow.addColorStop(1, 'rgba(108,92,231,0)');
+    netCtx.beginPath();
+    netCtx.arc(n.x, n.y, n.r * 5, 0, Math.PI * 2);
+    netCtx.fillStyle = glow;
+    netCtx.fill();
+
+    netCtx.beginPath();
+    netCtx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    netCtx.fillStyle = `rgba(108,92,231,${0.35 + pulse * 0.25})`;
+    netCtx.fill();
+  });
+
+  floaters.forEach(f => {
+    const pulse = Math.sin(f.phase) * 0.5 + 0.5;
+    const a = f.alpha * (0.6 + pulse * 0.4);
+
+    const glow = netCtx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 4);
+    glow.addColorStop(0, `rgba(${f.color[0]},${f.color[1]},${f.color[2]},${a * 0.4})`);
+    glow.addColorStop(1, `rgba(${f.color[0]},${f.color[1]},${f.color[2]},0)`);
+    netCtx.beginPath();
+    netCtx.arc(f.x, f.y, f.r * 4, 0, Math.PI * 2);
+    netCtx.fillStyle = glow;
+    netCtx.fill();
+
+    netCtx.beginPath();
+    netCtx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    netCtx.fillStyle = `rgba(${f.color[0]},${f.color[1]},${f.color[2]},${a})`;
+    netCtx.fill();
+  });
+
+  netPackets = netPackets.filter(p => {
+    p.t += p.speed;
+    if (p.t >= 1) return false;
+    const cx = p.sx + (p.ex - p.sx) * p.t;
+    const cy = p.sy + (p.ey - p.sy) * p.t;
+
+    const trail = netCtx.createRadialGradient(cx, cy, 0, cx, cy, 5);
+    trail.addColorStop(0, `rgba(${p.color[0]},${p.color[1]},${p.color[2]},0.7)`);
+    trail.addColorStop(0.5, `rgba(${p.color[0]},${p.color[1]},${p.color[2]},0.25)`);
+    trail.addColorStop(1, `rgba(${p.color[0]},${p.color[1]},${p.color[2]},0)`);
+    netCtx.beginPath();
+    netCtx.arc(cx, cy, 5, 0, Math.PI * 2);
+    netCtx.fillStyle = trail;
+    netCtx.fill();
+
+    netCtx.beginPath();
+    netCtx.arc(cx, cy, 1.2, 0, Math.PI * 2);
+    netCtx.fillStyle = 'rgba(255,255,255,0.85)';
+    netCtx.fill();
+    return true;
+  });
+
+  requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', () => {
+  resizeNetCanvas();
+  initNodes();
+  initFloaters();
+});
+resizeNetCanvas();
+initNodes();
+initFloaters();
+animate();
+
+// ===== HERO SPARKLES =====
+const heroSparkles = document.getElementById('heroSparkles');
+const sparkleColors = [
+  'rgba(108,92,231,0.7)',
+  'rgba(0,206,201,0.6)',
+  'rgba(253,121,168,0.5)',
+  'rgba(255,255,255,0.4)'
+];
+
+for (let i = 0; i < 25; i++) {
+  const s = document.createElement('div');
+  s.className = 'hero-sparkle';
+  const size = Math.random() * 3 + 1.5;
+  s.style.cssText = `
+    width:${size}px;height:${size}px;
+    left:${Math.random() * 100}%;
+    top:${Math.random() * 100}%;
+    background:${sparkleColors[Math.floor(Math.random() * sparkleColors.length)]};
+    box-shadow:0 0 ${size * 3}px ${sparkleColors[Math.floor(Math.random() * sparkleColors.length)]};
+    animation-duration:${Math.random() * 3 + 2}s;
+    animation-delay:${Math.random() * 4}s;
+  `;
+  heroSparkles.appendChild(s);
+}
 
 // ===== SCROLL REVEAL =====
 const observer = new IntersectionObserver((entries) => {
@@ -132,7 +314,7 @@ const quizData = [
     options: [
       'Это лишнее, опыт важнее',
       'Готов учиться, если компания оплатит',
-      'Активно учащуся — сертификации открывают двери',
+      'Активно учащимся — сертификации открывают двери',
       'Только если обязательно'
     ],
     correct: 2
@@ -143,7 +325,7 @@ const quizData = [
       'Высокая зарплата',
       'Стабильность и интересные задачи',
       'Минимум ответственности',
-      'Всё remote и без звонков'
+      'Всё удаленно и без звонков'
     ],
     correct: 1
   }
