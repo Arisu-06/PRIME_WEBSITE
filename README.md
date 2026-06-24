@@ -36,6 +36,4 @@
 
 Код должен быть готовым в файлах: `index.html`, `style.css`, `script.js`.
 
-## Автор
 
-Arisu-06
