@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Инженер по эксплуатации сети — Цифровой портрет</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Навигация -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">Инженер сети</div>
+    <div class="nav-links">
+      <a href="#hero">Главная</a>
+      <a href="#about">Кто это</a>
+      <a href="#tasks">Задачи</a>
+      <a href="#skills">Навыки</a>
+      <a href="#career">Карьера</a>
+      <a href="#day">День</a>
+      <a href="#why">Важность</a>
+      <a href="#quiz">Тест</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Глобальные частицы -->
+  <div class="global-particles" id="particles"></div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Цифровой портрет профессии</div>
+      <h1 class="hero-title">
+        <span class="line">Инженер по</span>
+        <span class="line accent">эксплуатации сети</span>
+      </h1>
+      <p class="hero-subtitle">Тот, кто дает интернету работать 24/7</p>
+      <a href="#about" class="btn btn-primary hero-btn">
+        <span>Узнать больше</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
+      </a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-indicator"></div>
+    </div>
+  </section>
+
+  <!-- Кто это -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">01</span>
+        <h2 class="section-title">Кто это простыми словами</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card main-card reveal">
+          <div class="about-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v6m0 0H3m6 0h12M3 9v10a2 2 0 0 0 2 2h4m-6-12h18v10a2 2 0 0 1-2 2h-4m0 0H9m6 0v-6m0 6H9m6 0h3"/></svg>
+          </div>
+          <p>Представьте сеть — это как дороги, по которым ездят данные. <strong>Инженер по эксплуатации сети</strong> — это человек, который следит, чтобы эти «дороги» всегда были свободными, безопасными и быстрыми.</p>
+        </div>
+        <div class="about-cards-row reveal">
+          <div class="about-card">
+            <div class="about-emoji">🔧</div>
+            <h3>Находит поломки</h3>
+            <p>Когда интернет «упал», он первым выясняет, где именно проблема</p>
+          </div>
+          <div class="about-card">
+            <div class="about-emoji">📊</div>
+            <h3>Следит за трафиком</h3>
+            <p>Мониторит, чтобы сеть не была перегружена и всё работало быстро</p>
+          </div>
+          <div class="about-card">
+            <div class="about-emoji">🛡️</div>
+            <h3>Защищает сеть</h3>
+            <p>Обновляет оборудование, предотвращает сбои и атаки</p>
+          </div>
+          <div class="about-card">
+            <div class="about-emoji">⚡</div>
+            <h3>Реагирует мгновенно</h3>
+            <p>Дежурит 24/7, чтобы решать проблемы в реальном времени</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Рабочие задачи -->
+  <section class="section section-dark" id="tasks">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">02</span>
+        <h2 class="section-title">Рабочие задачи</h2>
+        <p class="section-desc">Чем занимается инженер каждый день</p>
+      </div>
+      <div class="tasks-grid">
+        <div class="task-card reveal" style="--delay: 0">
+          <div class="task-num">01</div>
+          <h3>Мониторинг сети</h3>
+          <p>Отслеживает состояние оборудования и каналов связи через специальные системы в реальном времени</p>
+        </div>
+        <div class="task-card reveal" style="--delay: 1">
+          <div class="task-num">02</div>
+          <h3>Устранение аварий</h3>
+          <p>Оперативно находит и исправляет сбои — от обрыва кабеля до сбоя на сервере</p>
+        </div>
+        <div class="task-card reveal" style="--delay: 2">
+          <div class="task-num">03</div>
+          <h3>Настройка оборудования</h3>
+          <p>Конфигурирует маршрутизаторы, коммутаторы и другое сетевое оборудование</p>
+        </div>
+        <div class="task-card reveal" style="--delay: 3">
+          <div class="task-num">04</div>
+          <h3>Обновление ПО</h3>
+          <p>Устанавливает обновления прошивок и программного обеспечения на сетевые устройства</p>
+        </div>
+        <div class="task-card reveal" style="--delay: 4">
+          <div class="task-num">05</div>
+          <h3>Документация</h3>
+          <p>Ведёт журналы инцидентов, схемы сети и отчёты о проделанной работе</p>
+        </div>
+        <div class="task-card reveal" style="--delay: 5">
+          <div class="task-num">06</div>
+          <h3>Планирование развития</h3>
+          <p>Участвует в масштабировании сети и внедрении новых технологий</p>
+        </div>
+        <div class="task-card reveal" style="--delay: 6">
+          <div class="task-num">07</div>
+          <h3>Тестирование</h3>
+          <p>Проводит нагрузочные тесты и проверяет резервные каналы перед запуском</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hard & Soft Skills -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">03</span>
+        <h2 class="section-title">Hard & Soft Skills</h2>
+      </div>
+      <div class="skills-container">
+        <div class="skills-column reveal">
+          <div class="skills-label hard">Hard Skills</div>
+          <div class="skill-item">
+            <span class="skill-name">Сетевые протоколы</span>
+            <div class="skill-bar"><div class="skill-fill" style="--w:95%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Cisco / MikroTik / Juniper</span>
+            <div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Мониторинг (Zabbix, Grafana)</span>
+            <div class="skill-bar"><div class="skill-fill" style="--w:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Linux / Windows Server</span>
+            <div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">SQL и базы данных</span>
+            <div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Scripting (Python, Bash)</span>
+            <div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Телекоммуникации (GPON, DSL)</span>
+            <div class="skill-bar"><div class="skill-fill" style="--w:82%"></div></div>
+          </div>
+        </div>
+        <div class="skills-column reveal">
+          <div class="skills-label soft">Soft Skills</div>
+          <div class="skill-item">
+            <span class="skill-name">Стрессоустойчивость</span>
+            <div class="skill-bar"><div class="skill-fill soft-fill" style="--w:98%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Аналитическое мышление</span>
+            <div class="skill-bar"><div class="skill-fill soft-fill" style="--w:92%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Коммуникация в команде</span>
+            <div class="skill-bar"><div class="skill-fill soft-fill" style="--w:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Внимание к деталям</span>
+            <div class="skill-bar"><div class="skill-fill soft-fill" style="--w:94%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Тайм-менеджмент</span>
+            <div class="skill-bar"><div class="skill-fill soft-fill" style="--w:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Быстрое обучение</span>
+            <div class="skill-bar"><div class="skill-fill soft-fill" style="--w:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Ответственность</span>
+            <div class="skill-bar"><div class="skill-fill soft-fill" style="--w:96%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Как начать карьеру -->
+  <section class="section section-dark" id="career">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">04</span>
+        <h2 class="section-title">Как начать карьеру студенту</h2>
+      </div>
+      <div class="career-timeline">
+        <div class="timeline-item reveal" style="--delay:0">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-step">Шаг 1</div>
+            <h3>Обучение</h3>
+            <p>Получи профильное образование: информатика, телекоммуникации или сетевые технологии. Курсы Cisco (CCNA) — отличный старт.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="--delay:1">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-step">Шаг 2</div>
+            <h3>Практика</h3>
+            <p>Проходи стажировку в ЭР-СТАРТ. Любой опыт будет плюсом!</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="--delay:2">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-step">Шаг 3</div>
+            <h3>Сертификации</h3>
+            <p>Получи сертификаты: CCNA, Juniper JNCIA, MikroTik MTCNA. Они открывают двери в крупные компании.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="--delay:3">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-step">Шаг 4</div>
+            <h3>Первая позиция</h3>
+            <p>Начни с младшего инженера или NOC-оператора. Учись у старших коллег и расти.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="--delay:4">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-step">Шаг 5</div>
+            <h3>Рост</h3>
+            <p>Через 2–5 лет — Senior-инженер, Lead, а затем и руководитель группы эксплуатации.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Один день из жизни -->
+  <section class="section" id="day">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">05</span>
+        <h2 class="section-title">Один день из жизни</h2>
+      </div>
+      <div class="day-schedule">
+        <div class="day-item reveal" style="--delay:0">
+          <div class="day-time">08:00</div>
+          <div class="day-card">
+            <div class="day-emoji">☀️</div>
+            <h3>Начало смены</h3>
+            <p>Проверка дашбордов: всё ли работает. Просмотр ночных алертов и журналов событий.</p>
+          </div>
+        </div>
+        <div class="day-item reveal" style="--delay:1">
+          <div class="day-time">10:00</div>
+          <div class="day-card">
+            <div class="day-emoji">🔍</div>
+            <h3>Утренний обход</h3>
+            <p>Проверка серверного оборудования, температура, индикаторы, вентиляция.</p>
+          </div>
+        </div>
+        <div class="day-item reveal" style="--delay:2">
+          <div class="day-time">12:00</div>
+          <div class="day-card">
+            <div class="day-emoji">🚨</div>
+            <h3>Инцидент</h3>
+            <p>Поступает обращение: сегмент сети в одном районе работает медленно. Диагностика, поиск причины.</p>
+          </div>
+        </div>
+        <div class="day-item reveal" style="--delay:3">
+          <div class="day-time">14:00</div>
+          <div class="day-card">
+            <div class="day-emoji">☕</div>
+            <h3>Обед + кофе</h3>
+            <p>Короткий перерыв. Обсуждение с коллегами планов на день.</p>
+          </div>
+        </div>
+        <div class="day-item reveal" style="--delay:4">
+          <div class="day-time">15:00</div>
+          <div class="day-card">
+            <div class="day-emoji">⚙️</div>
+            <h3>Настройка</h3>
+            <p>Обновление конфигурации маршрутизатора. Тестирование нового канала связи.</p>
+          </div>
+        </div>
+        <div class="day-item reveal" style="--delay:5">
+          <div class="day-time">17:00</div>
+          <div class="day-card">
+            <div class="day-emoji">📋</div>
+            <h3>Документация</h3>
+            <p>Оформление отчёта об инциденте. Обновление схемы сети.</p>
+          </div>
+        </div>
+        <div class="day-item reveal" style="--delay:6">
+          <div class="day-time">18:00</div>
+          <div class="day-card">
+            <div class="day-emoji">✅</div>
+            <h3>Конец смены</h3>
+            <p>Передача смены ночному инженеру. Всё стабильно, сеть работает исправно.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Почему важно -->
+  <section class="section section-dark" id="why">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">06</span>
+        <h2 class="section-title">Почему роль важна для ЭР-Телеком</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal" style="--delay:0">
+          <div class="why-number">01</div>
+          <h3>Непрерывность связи</h3>
+          <p>Миллионы абонентов магистральной сети. Каждый час простоя — это недовольные клиенты и убытки.</p>
+        </div>
+        <div class="why-card reveal" style="--delay:1">
+          <div class="why-number">02</div>
+          <h3>Репутация компании</h3>
+          <p>Качество услуг напрямую зависит от работы инженеров. Стабильная сеть = доверие клиентов.</p>
+        </div>
+        <div class="why-card reveal" style="--delay:2">
+          <div class="why-number">03</div>
+          <h3>Безопасность данных</h3>
+          <p>Инженеры защищают сеть от взлома и утечек персональных данных абонентов.</p>
+        </div>
+        <div class="why-card reveal" style="--delay:3">
+          <div class="why-number">04</div>
+          <h3>Развитие инфраструктуры</h3>
+          <p>Без эксплуатации невозможно масштабировать сеть и внедрять новые технологии (5G, GPON).</p>
+        </div>
+        <div class="why-card reveal" style="--delay:4">
+          <div class="why-number">05</div>
+          <h3>Экономия ресурсов</h3>
+          <p>Проактивное обслуживание дешевле, чем ликвидация аварий. Инженер экономит бюджет компании.</p>
+        </div>
+        <div class="why-card reveal" style="--delay:5">
+          <div class="why-number">06</div>
+          <h3>Комплаенс</h3>
+          <p>Работа по стандартам и регуляторным требованиям.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Интерактивный тест -->
+  <section class="section" id="quiz">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">07</span>
+        <h2 class="section-title">Проверь себя</h2>
+        <p class="section-desc">Тест: подходит ли тебе профессия инженера по эксплуатации сети?</p>
+      </div>
+      <div class="quiz-container" id="quizContainer">
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar" id="quizProgress"></div>
+          <span class="quiz-progress-text" id="quizProgressText">1 / 8</span>
+        </div>
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-result" id="quizResult" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Цифровой портрет профессии &copy; 2026</p>
+      <p class="footer-sub">Инженер по эксплуатации сети — профессия, которая дает миру связь</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
